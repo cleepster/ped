@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My First Heading</h1>
+<p>My first paragraph.</p>
+
+
+var questions = [ // Сначала вопрос, потом варианты через запятую, потом правильный ответ
+["1. Адамзат тарихы дамуының ең алғашқы кезеңі?",
+"A) Қола дәуірі",
+"В) Темір дәуірі",
+"С) Рулық тайпалық кезең",
+"D) Андронов кезеңі",
+"Е)  Тас дәуірі",
+5],
+["2. Алғашқы адамдардың бастапқы кезеңдегі топтасу жүйесі?",
+"А) Рулық",
+"В) Тобыр",
+"С) Қауымдастық",
+"D) Көшпелілер",
+"Е) Тайпалық",
+2],
+["3. Алағашқы адамдардың тобырдан кейінгі топтасу жүйесі?",
+"А) Тайпалық",
+"В) Малшылар қауымдастығы",
+"С) Рулық", 
+"D) Өндірістік ұжым",
+"Е) Тері илеушілер мен егіншілер ұйымы",
+3],
+
+
+], qQuantity = questions.length, tAnswers = 0, wAnswers = 0;
+ 
+function goNext(N) { // N = номер вопроса
+document.getElementById('qBlock').innerHTML = ""; // Очищаем блок вопросов
+var qElem = questions[N].length-2, i=1; // Кол-во в массиве минус вопрос и счетчик
+var e = document.getElementById('qBlock');
+var addQ = document.createElement('h3'); // заголовок, id из номера вопроса
+addQ.id = 'head' + N;
+e.appendChild(addQ);
+document.getElementById('head' + N).innerHTML = questions[N][i-1]; // вписываем вопрос
+while (qElem >= i) {
+var addP = document.createElement('p'); // абзацы
+addP.id = 'p' + i;
+e.appendChild(addP);
+    var addInput = document.createElement('input'); // инпуты
+   addInput.type = 'radio';
+    addInput.name = 'a';
+    addInput.value = i;
+   document.getElementById('p' + i).appendChild(addInput);
+    document.getElementById('p' + i).insertAdjacentHTML("BeforeEnd", ' '+questions[N][i]); // вопросы
+    i++;
+    }
+    document.getElementById('btn').innerHTML = "<input type='button' value='Тексеру' onclick='submit("+N+")' />";
+}
+ 
+function submit(N) { // Проверяем ответы
+var varQuantity = (document.getElementsByName('a').length), oneVar = 0;
+while (oneVar <= varQuantity) {
+if (document.getElementsByName('a')[oneVar].checked == false) {
+oneVar++;
+}
+else {
+var all = questions[N].length-1;
+var t = questions[N][all]; // правильный ответ
+if (document.getElementsByName('a')[oneVar].value == t) {
+document.getElementById('p' + t).className = 'tt';
+tAnswers++;
+} else {
+var ff = oneVar+1;
+document.getElementById('p' + t).className = 'tt';
+document.getElementById('p' + ff).className = 'ff';
+wAnswers++;
+}
+break;
+}
+}
+N++;
+if (N == qQuantity) {
+document.getElementById('btn').innerHTML = "<input type='button' id='next' value='Перейти к результатам' onclick='toResults()' />";
+} else {
+document.getElementById('btn').innerHTML = "<input type='button' id='next' value='Келесі сұрақ' onclick='goNext("+N+")' />";
+}
+}
+ 
+function toResults() {
+document.getElementById('qBlock').innerHTML = "<h3>Сынақ аяқталды!</h3>";
+document.getElementById('btn').innerHTML = "<h4>Нәтиже:</h4>Дұрыс жауаптар: "+tAnswers+"<br>Қате жауаптар: "+wAnswers+"<p>Желаете пройти тест еще?</p><input type='button' value='Бастау!' onclick='goNext(0)' />";
+tAnswers = 0, wAnswers = 0;
+}
+</script>
+
+
+</body>
+</html>
