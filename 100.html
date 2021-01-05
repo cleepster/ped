@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <style type="text/css">
+.tt {color: green; font-weight: bold;}
+.ff {color: red; font-weight: bold;}
+{
+h1 color:"green"
+}
+</style>
+ 
+<body>
+
+<h1>Педагогика тест</h1>
+
+<script>
+var questions = [ // Сначала вопрос, потом варианты через запятую, потом правильный ответ
+["126. Педагогикалық үдеріске   ең алғаш анықтама берген Білімді саналылықпен белсене қабылдап, оның өмір және практикамен байланысын тереңдету",
+"A) түсініктілік принципі ",
+"В) ғылымилық принципі ",
+"С) көрнекілік принципі",
+"D) жүйелілік және бірізділік принципі ",
+"Е) саналылық және белсенділік принципі",
+5],
+["127.  Типтік оқу жоспарындағы міндетті компонент пәндерінің мазмұнын, оқу көлемі мен тәртібін анықтайтын құжат",
+"А) типтік оқу бағдарламасы ",
+"В) типтік оқу жоспары ",
+"С) білім беру бағдарламасы",
+"D) оқулық",
+"Е) оқу құралы",
+1],
+["128. Білім мазмұнын анықтауға  қандай факторлар әсер етеді",
+"А) объективтік және субъективтік ",
+"В) ішкі және сыртқы ",
+"С)  меза және микро", 
+"D) макро және микро",
+"Е) табиғат және қоғам",
+1],
+ ["129.  Оқытудың дамытушылығы мен тәрбиелілігі",
+"А) психологиялық принциптер",
+"В) дидактикалық принциптер",
+"С) педагогикалық принциптер", 
+"D) ғылымилылық принциптер",
+"Е) практикалық принциптер",
+2],
+
+
+], qQuantity = questions.length, tAnswers = 0, wAnswers = 0;
+ 
+function goNext(N) { // N = номер вопроса
+document.getElementById('qBlock').innerHTML = ""; // Очищаем блок вопросов
+var qElem = questions[N].length-2, i=1; // Кол-во в массиве минус вопрос и счетчик
+var e = document.getElementById('qBlock');
+var addQ = document.createElement('h3'); // заголовок, id из номера вопроса
+addQ.id = 'head' + N;
+e.appendChild(addQ);
+document.getElementById('head' + N).innerHTML = questions[N][i-1]; // вписываем вопрос
+while (qElem >= i) {
+var addP = document.createElement('p'); // абзацы
+addP.id = 'p' + i;
+e.appendChild(addP);
+    var addInput = document.createElement('input'); // инпуты
+   addInput.type = 'radio';
+    addInput.name = 'a';
+    addInput.value = i;
+   document.getElementById('p' + i).appendChild(addInput);
+    document.getElementById('p' + i).insertAdjacentHTML("BeforeEnd", ' '+questions[N][i]); // вопросы
+    i++;
+    }
+    document.getElementById('btn').innerHTML = "<input type='button' value='Тексеру' onclick='submit("+N+")' />";
+}
+ 
+function submit(N) { // Проверяем ответы
+var varQuantity = (document.getElementsByName('a').length), oneVar = 0;
+while (oneVar <= varQuantity) {
+if (document.getElementsByName('a')[oneVar].checked == false) {
+oneVar++;
+}
+else {
+var all = questions[N].length-1;
+var t = questions[N][all]; // правильный ответ
+if (document.getElementsByName('a')[oneVar].value == t) {
+document.getElementById('p' + t).className = 'tt';
+tAnswers++;
+} else {
+var ff = oneVar+1;
+document.getElementById('p' + t).className = 'tt';
+document.getElementById('p' + ff).className = 'ff';
+wAnswers++;
+}
+break;
+}
+}
+N++;
+if (N == qQuantity) {
+document.getElementById('btn').innerHTML = "<input type='button' id='next' value='Перейти к результатам' onclick='toResults()' />";
+} else {
+document.getElementById('btn').innerHTML = "<input type='button' id='next' value='Келесі сұрақ' onclick='goNext("+N+")' />";
+}
+}
+ 
+function toResults() {
+document.getElementById('qBlock').innerHTML = "<h3>Сынақ аяқталды!</h3>";
+document.getElementById('btn').innerHTML = "<h4>Нәтиже:</h4>Дұрыс жауаптар: "+tAnswers+"<br>Қате жауаптар: "+wAnswers+"<p>Желаете пройти тест еще?</p><input type='button' value='Бастау!' onclick='goNext(0)' />";
+tAnswers = 0, wAnswers = 0;
+}
+</script>
+
+ <div id="qBlock"><h2>Тест</h2>
+</div>
+<div id='btn'>
+<input type="button" value="Бастау!" onclick="goNext(0)" />
+</div>
+
+</body>
+</html>
