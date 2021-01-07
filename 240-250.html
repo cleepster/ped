@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <style type="text/css">
+.tt {color: green; font-weight: bold;}
+.ff {color: red; font-weight: bold;}
+{
+h1 color:"green"
+}
+</style>
+ 
+<body>
+
+<h1>Психология тест</h1>
+
+<script>
+var questions = [ // Сначала вопрос, потом варианты через запятую, потом правильный ответ
+
+["240. Дипломатикалық кәсіпкерлік пен шығармашылыққа толы, адамдар өз басын құрбандыққа тігіп тәуекелдікке баруға дайын болатын корпоративті мәдениет түрі::",
+"A)Кәсіби мәдениет",
+"B)Басқарушы мідениет",
+"C)Адхократтық мәдениет",
+"D)Бизнестік мәдениет",
+"E)Әлеуметтік мәдениет",
+ 3],
+["241. Шейн бойынша корпортивті мәдениеттің деңгейлерін көрсетіңіз:: ",
+"A)сыртқы, ішкі және терең",
+"B)Бірінші, екінші",
+"C)Жоғарғы, төменгі ",
+"D)Жалпы, жеке ",
+"E)Күрделі, қарапайым",
+1],
+["242. Киім стилі және брендтің графикалық көрінісіндегі шешімдер, жұмыс орындарын ұйымдастыру,рәміздер, рәсімдер көрініс табатын корпоративті мәдениет деңгейі: ",
+"A) Ішкі деңгей",
+"B) Сыртқы деңгей",
+"C) Терең деңгей",
+"D) Төменгі деңгей",
+"E) Аралас деңгей",
+2],
+["243.Моральдық нанымдар және этикалық ережелер, мінез-құлық кодексі, құндылықтар, корпоративті философия көрініс табатын корпоративті мәдениет деңгейі:",
+"A)Терең деңгей",
+"B)Бірінші деңгей",
+"C)Сыртқы деңгей",
+"D)Ішкі деңгей",
+"E)Аралас деңгей",
+4],
+["244. Сенімдер мен көзқарастар, ұлттық менталитет, дүниеге, адамға және белсенділікке деген қатынастан көрініс табатын корпоративті мәдениет деңгейі:",
+"A)Аралас деңгей",
+"B)Бірінші деңгей",
+"C)Сыртқы деңгей",
+"D)Ішкі деңгей",
+"E)Терең деңгей ",
+5],
+["245. Корпоративті мәдениеттің объективті элементтері:",
+"A)Ұйымдық, этикалық құндылықтар, идеология",
+"B)Тауар белгісі, эмблема",
+"C)Бекітілген дресс-код",
+"D)Кеңсе безендіру талаптары",
+"E)Этикалық кодекс, ұжымдық дәстүрлер",
+1],
+["246.Корпоративті мәдениеттің субъективті элементтері:: ",
+"A)Ұйымдық, этикалық құндылықтар",
+"B)Тауар белгісі, эмблема, бекітілген дресс-код",
+"C)Идеология",
+"D)Этикалық кодекс, ұжымдық дәстүрлер",
+"E)Дәстүрлер, рәсімдер",
+2]
+["247.Ортақ дүниелері көп адамдары бар өте достық қарым-қатынастағы жұмыс орнымен ерекшелінетін корпоративті мәдениет түрі:: ",
+"A)Йерархия",
+"B)Бюрократия",
+"C)Кландық",
+"D)Нарықтық",
+"E)Ұжымдық",
+3],
+["248.Кландық мәдениет көшбасшы түрлері:",
+"A)Бәсекелес, бағыттаушы",
+"B)Техникалық, келісімгер",
+"C)Координатор, талапшыл",
+"D)Келісімгер, тәлімгер",
+"E)Инструктор, жаңашыл",
+4],
+["249.Иерархиялық мәдениет көшбасшы рөлдері",
+"A)Нұсқаушы, орындаушы",
+"B)Бәсекелес, бағыттаушы",
+"C)Тәлімгер, жаңашыл",
+"D)Келісімгер, талапшыл",
+"E)Инструктор, координатор",
+5],
+["250.Қарым-қатынастың әлеуметтік қызметпен, белгілі бір уақытпен, формамен қамтамасыз етілетін түрі::",
+"A) Ресми қарым-қатынас",
+"B) Іскерлік қарым-қатынас",
+"C) Әлеуметтік-бағдарлы қарым-қатынас",
+"D) Ресми емес қарым-қатынас ",
+"E) Тұлғалық-бағдарлық қарым-қатынас.",
+1],
+], qQuantity = questions.length, tAnswers = 0, wAnswers = 0;
+ 
+function goNext(N) { // N = номер вопроса
+document.getElementById('qBlock').innerHTML = ""; // Очищаем блок вопросов
+var qElem = questions[N].length-2, i=1; // Кол-во в массиве минус вопрос и счетчик
+var e = document.getElementById('qBlock');
+var addQ = document.createElement('h3'); // заголовок, id из номера вопроса
+addQ.id = 'head' + N;
+e.appendChild(addQ);
+document.getElementById('head' + N).innerHTML = questions[N][i-1]; // вписываем вопрос
+while (qElem >= i) {
+var addP = document.createElement('p'); // абзацы
+addP.id = 'p' + i;
+e.appendChild(addP);
+    var addInput = document.createElement('input'); // инпуты
+   addInput.type = 'radio';
+    addInput.name = 'a';
+    addInput.value = i;
+   document.getElementById('p' + i).appendChild(addInput);
+    document.getElementById('p' + i).insertAdjacentHTML("BeforeEnd", ' '+questions[N][i]); // вопросы
+    i++;
+    }
+    document.getElementById('btn').innerHTML = "<input type='button' value='Тексеру' onclick='submit("+N+")' />";
+}
+ 
+function submit(N) { // Проверяем ответы
+var varQuantity = (document.getElementsByName('a').length), oneVar = 0;
+while (oneVar <= varQuantity) {
+if (document.getElementsByName('a')[oneVar].checked == false) {
+oneVar++;
+}
+else {
+var all = questions[N].length-1;
+var t = questions[N][all]; // правильный ответ
+if (document.getElementsByName('a')[oneVar].value == t) {
+document.getElementById('p' + t).className = 'tt';
+tAnswers++;
+} else {
+var ff = oneVar+1;
+document.getElementById('p' + t).className = 'tt';
+document.getElementById('p' + ff).className = 'ff';
+wAnswers++;
+}
+break;
+}
+}
+N++;
+if (N == qQuantity) {
+document.getElementById('btn').innerHTML = "<input type='button' id='next' value='Перейти к результатам' onclick='toResults()' />";
+} else {
+document.getElementById('btn').innerHTML = "<input type='button' id='next' value='Келесі сұрақ' onclick='goNext("+N+")' />";
+}
+}
+ 
+function toResults() {
+document.getElementById('qBlock').innerHTML = "<h3>Сынақ аяқталды!</h3>";
+document.getElementById('btn').innerHTML = "<h4>Нәтиже:</h4>Дұрыс жауаптар: "+tAnswers+"<br>Қате жауаптар: "+wAnswers+"<p>Желаете пройти тест еще?</p><input type='button' value='Бастау!' onclick='goNext(0)' />";
+tAnswers = 0, wAnswers = 0;
+}
+</script>
+
+ <div id="qBlock"><h2>Тест</h2>
+</div>
+<div id='btn'>
+<input type="button" value="Бастау!" onclick="goNext(0)" />
+</div>
+
+</body>
+</html>
